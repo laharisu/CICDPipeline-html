@@ -16,3 +16,9 @@ steps:
       includeRootFolder: false
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/spl.zip'
+  - task: SSH@0
+    inputs:
+      sshEndpoint:  'ssh-comms'
+      runOptions: 'commands'
+      commands: |
+        scp $(Build.ArtifactStagingDirectory)/spl.zip azureuser@172.210.131.237: /ubuntu/home
