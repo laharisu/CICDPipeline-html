@@ -1,9 +1,11 @@
+
 trigger:
   branches:
     include:
       - main
 
 pool: HTML-CI-Pipeline
+  
 
 steps:
   - checkout: self
@@ -18,5 +20,7 @@ steps:
       sshEndpoint:  'ssh-comms'
       runOptions: 'commands'
       commands: |
-        mkdir -p /home/azureuser/spl
-        scp $(System.DefaultWorkingDirectory)/spl.zip azureuser@172.210.131.237:/home/azureuser/spl/
+        scp $(Build.ArtifactStagingDirectory)/spl.zip azureuser@172.210.131.237: /ubuntu/home
+
+
+
