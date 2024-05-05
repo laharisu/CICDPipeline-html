@@ -18,5 +18,6 @@ steps:
       sshEndpoint: 'ssh-comms'
       runOptions: 'commands'
       commands: |
+        ssh-keyscan -H 172.210.131.237 >> ~/.ssh/known_hosts
         mkdir -p /home/azureuser/spl
         scp $(Build.ArtifactStagingDirectory)/spl.zip azureuser@172.210.131.237:/home/azureuser/spl/
