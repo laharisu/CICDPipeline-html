@@ -13,11 +13,19 @@ steps:
       includeRootFolder: false
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/spl.zip'
+  - task: CopyFilesOverSSH@0
+    inputs:
+      sshEndpoint: 'ssh-comms'
+      sourceFolder: '$(Build.ArtifactStagingDirectory)'
+      contents: 'spl.zip'
+      targetFolder: '/home/azureuser/spl'
   - task: SSH@0
     inputs:
       sshEndpoint: 'ssh-comms'
       runOptions: 'commands'
       commands: |
-        ssh-keyscan -H 172.210.131.237 >> ~/.ssh/known_hosts
-        mkdir -p /home/azureuser/spl
-        scp $(Build.ArtifactStagingDirectory)/spl.zip azureuser@172.210.131.237:/home/azureuser/spl/
+        cd /home/azureuser/spl
+        unzip spl.zip
+        rm spl.zip
+        sudo cp -r /home/azureuser/spl/* /var/www/html/
+        sudo systemctl restart nginx
