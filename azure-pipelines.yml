@@ -19,4 +19,4 @@ steps:
       runOptions: 'commands'
       commands: |
         mkdir -p /home/azureuser/spl
-        scp $(Build.ArtifactStagingDirectory)/spl.zip azureuser@172.210.131.237:/home/azureuser/spl/
+        scp $(System.DefaultWorkingDirectory)/spl.zip azureuser@172.210.131.237:/home/azureuser/spl/
