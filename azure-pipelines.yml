@@ -5,8 +5,8 @@ trigger:
     include:
       - main
 
-pool:
-  vmImage: ubuntu-latest
+pool: HTML-CI-Pipeline
+  
 
 steps:
   - checkout: self
